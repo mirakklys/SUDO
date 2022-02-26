@@ -1,9 +1,9 @@
 # SUDO
-- > Pop_OS!
+- > ##Pop_OS!
 - show usb devices
 - `lsusb`
 - update software, install GParted and NeoFetch
-- `sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install neofetch gparted inxi ffmpeg jq npm mpv inkscape gnome-tweaks mypaint htop vlc blender flatpak -y`
+- `sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install neofetch gparted inxi ffmpeg jq npm mpv inkscape gnome-tweaks mypaint htop vlc blender flatpak gparted -y`
 - `flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo`
 - tiktok-scraper installation
 - `npm i --package-lock-only`
@@ -45,15 +45,21 @@
     - `wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && sudo apt install ./google-chrome-stable_current_amd64.deb`
 - install drivers for the wifi module
 - `sudo apt-get update && sudo apt-get install dkms git && git clone https://github.com/brektrou/rtl8821CU.git && cd ~/rtl8821CU && sudo ./dkms-install.sh && sudo /usr/sbin/usb_modeswitch -KW -v 0bda -p 1a2b && sudo modprobe 8821cu`
-- > Fedora
+
+
+- > ##Fedora
 - `sudo dnf upgrade`
-- > Windows
+
+
+- > ##Windows
 - set the style of command line
 - `setx PROMPT $T$H$H$H$S$G$S$P$_$$$S`
 - turn off BDE encryption
 - `manage-bde -status`
 - `manage-bde -off <drive letter>:`
-- > ffmpeg commands
+
+
+- > ##ffmpeg commands
 - show all available devices
 - `ffmpeg -list_devices true -f dshow -i dummy`
 - record screen
