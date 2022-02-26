@@ -57,7 +57,7 @@
     sudo mkdir /mnt/win-efi
     sudo mount /dev/nvme0n1p1 /mnt/win-efi                      // mount Win efi into /mnt/win-ef
     sudo cp -r /mnt/win-efi/EFI/Microsoft /boot/efi/EFI         // copy Win efi files into Pop_OS! efi bootloader
-    sudo micro /boot/efi/loader/loader.conf                     // add timer to systemd-boot
+    sudo nano /boot/efi/loader/loader.conf                     // add timer to systemd-boot
         ex:	timeout=10
     sudo reboot
 
