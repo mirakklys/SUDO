@@ -1,6 +1,10 @@
 # SUDO
 
+***
+
 ## Pop_OS!
+
+***
 
 #### show usb devices
 
@@ -77,11 +81,13 @@
 
 `$ARCHIVE_OF_USED_COMMANDS`
 
+***
 
 ## Fedora
 
 `sudo dnf upgrade`
 
+***
 
 ## Windows
 
@@ -95,6 +101,7 @@
 
 `manage-bde -off <drive letter>:`
 
+***
 
 ## ffmpeg commands
 
