@@ -141,7 +141,7 @@
 
 `ffmpeg -f x11grab -framerate 30 -i :1.0 -f pulse -i default -c:v libx264 -preset fast -crf 26 -maxrate 2500k -bufsize 5000k -g 60 -vf format=yuv420p -c:a aac -b:a 128k -f flv stream.mp4`
 
-`ffmpeg -i $(youtube-dl -f best --get-url https://www.youtube.com/watch?v=A-6hKtEp99c) -f flv rtmp://a.rtmp.youtube.com/live2/ppef-1135-bwxe-3qfp-apss`
+`ffmpeg -i $(youtube-dl -f best --get-url https://www.youtube.com/watch?v=A-6hKtEp99c) -f flv rtmp://a.rtmp.youtube.com/live2/1111-1111-1111-1111-1111`
 
 #### create video from a single photo
 
