@@ -81,6 +81,14 @@
 
 `$ARCHIVE_OF_USED_COMMANDS`
 
+#### install and use fdupes for deleting duplicates
+
+`sudo apt install fdupes && fdupes -rdN .`                        // recursive, delete, choose 1st option without prompt
+
+#### replace spaces with "_"
+
+`for file in *; do mv "$file" `echo $file | tr ' ' '_'` ; done`
+
 ***
 
 ## Fedora
@@ -129,9 +137,15 @@
 
 `ffmpeg -f x11grab -framerate 60 -video_size 1920x1080 -i :0.0 f v4l2 -framerate 30 -i /dev/video0 -f alsa -ac 2 -ar 44100 -i pulse -f pulse -ac 2 -i alsa_output.pci-0000_01_00.1.hdmi-stereo.monitor -map 0:v:0 x11.mp4 -map 1:v:0 webcam.mp4 -map 2:a:0 -acodec libfdk_aac mic.aac -map 3:a:0 -acodec libfdk_aac desktop_audio.aac`
 
-#### streaming screen to file or stream service (mic included)
+#### streaming screen to file or stream service (mic included) + stream others' streams
 
 `ffmpeg -f x11grab -framerate 30 -i :1.0 -f pulse -i default -c:v libx264 -preset fast -crf 26 -maxrate 2500k -bufsize 5000k -g 60 -vf format=yuv420p -c:a aac -b:a 128k -f flv stream.mp4`
+
+`ffmpeg -i $(youtube-dl -f best --get-url https://www.youtube.com/watch?v=A-6hKtEp99c) -f flv rtmp://a.rtmp.youtube.com/live2/ppef-1135-bwxe-3qfp-apss`
+
+#### create video from a single photo
+
+`fmpeg -framerate 1 -i g28419.png output.mp4`
 
 ###### Examples of using mapping and concat functions
 
@@ -142,3 +156,7 @@
 `ffmpeg -ss 10:23 -to 25:35 -i GMT20220202-055744_Recording_1920x1080.mp4 -c:v libx264 -crf 18 1.mp4 && ffmpeg -ss 26:00 -to 42:03 -i GMT20220202-055744_Recording_1920x1080.mp4 -c:v libx264 -crf 18 2.mp4 && ffmpeg -i 1.mp4 -i 2.mp4 -filter_complex "[0:v:0][0:a:0][1:v:0][1:a:0]concat=n=2:v=1:a=1[outv][outa]" -map "[outv]" -map "[outa]" -vcodec libx264 -crf 18 MBI_Feb_2_1.mp4 && rm -rf 1.mp4 2.mp4 && ffmpeg -ss 47:47 -to 1:55:14 -i GMT20220202-055744_Recording_1920x1080.mp4 -c:v libx264 -crf 18 MBI_Feb_2_2.mp4 && ffmpeg -ss 1:58:51 -to 2:49:31 -i GMT20220202-055744_Recording_1920x1080.mp4 -c:v libx264 -crf 18 1.mp4 && ffmpeg -ss 2:53:01 -i GMT20220202-055744_Recording_1920x1080.mp4 -c:v libx264 -crf 18 2.mp4 && ffmpeg -i 1.mp4 -i 2.mp4 -filter_complex "[0:v:0][0:a:0][1:v:0][1:a:0]concat=n=2:v=1:a=1[outv][outa]" -map "[outv]" -map "[outa]" MBI_Feb_2_3.mp4 && rm -rf 1.mp4 2.mp4 GMT20220202-055744_Recording_1920x1080.mp4`
 
 `ffmpeg -ss 0:23 -to 10:05 -i GMT20220202-055744_Recording_1920x1080.mp4 -c:v libx264 -crf 18 1.mp4 && ffmpeg -ss 10:23 -to 15:35 -i GMT20220202-055744_Recording_1920x1080.mp4 -c:v libx264 -crf 18 2.mp4 && ffmpeg -ss 26:03 -to 33:33 -i GMT20220202-055744_Recording_1920x1080.mp4 -c:v libx264 -crf 18 3.mp4 && ffmpeg -ss 37:00 -to 42:03 -i GMT20220202-055744_Recording_1920x1080.mp4 -c:v libx264 -crf 18 4.mp4 && for i in {1..4} ; do echo "file $i.mp4" >> file.txt ; done && ffmpeg -f concat -safe 0 -i file.txt BIOL471_Feb_1.mp4 && for i in {1..4} ; do rm -f $i.mp4 ; done && rm -f file.txt GMT20220202-055744_Recording_1920x1080.mp4`
+
+###### Concat function
+
+`echo "file ../../Intro.mp4" >> file.txt && echo "file ../../inter.mp4" >> file.txt && for i in *.mp4 ; do echo "file $i" >> file.txt && echo "file ../../inter2.mp4" >> file.txt ; done && ffmpeg -f concat -safe 0 -i file.txt -crf 18 -c:v libx264 stream.mp4 -y`
